@@ -34,10 +34,9 @@ namespace EnterpriseAILib
 
        private static async Task<string> GetAnswer(string question)
         {
-            //OpenAIAPI api = new OpenAIAPI("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");
             OpenAIClient client = new OpenAIClient(
                 new Uri("https://xyz.openai.azure.com/"),
-                new AzureKeyCredential("ac08513bf7da4ba685e40a586dbded69"));
+                new AzureKeyCredential("API KEY"));
             GetMongoCollection("Log");
             var log = PopulateLog(question, "REQ");
             await _log.InsertOneAsync(log);
@@ -73,7 +72,7 @@ namespace EnterpriseAILib
         }
         private static  void GetMongoCollection(string Name)
         {
-            var client = new MongoClient("mongodb+srv://solutionsforai:D7UcFi1A6DxqAPdh@solutionsforaicluster.cmkm7hd.mongodb.net/?retryWrites=true&w=majority");
+            var client = new MongoClient("Connection String");
             var database = client.GetDatabase("Logs");
             _log = database.GetCollection<Log>(Name);
         }
